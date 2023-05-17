@@ -1,0 +1,6 @@
+{
+   "private": true,
+   "name": "xld-all-ms",
+   "workspaces": ["packages/*"],
+   "scripts": {}
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function getPersonInfo(one, two, three) {
+            console.log('one', one)
+            console.log('two', two)
+            console.log('three', three)
+            console.log('arguments', arguments);
+        }
+
+        const person = 'Lydia'
+        const age = 21
+        const sex = 1
+
+        getPersonInfo`${person} is ${age} years old, ${sex}`
+    </script>
+</body>
+
+</html>

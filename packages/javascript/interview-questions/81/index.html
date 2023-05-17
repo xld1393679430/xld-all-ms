@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>123</div>
+    <script>
+        // 打印出 1 - 10000 之间的所有对称数 例如 121、1331 
+        // const list = new Array(10000).fill(0).map((_, index) => index + 1)
+        // 生成26个大写英文字母
+        const list1 = Array.from({length: 26}, (item, index) => {
+            return String.fromCharCode(index + 65)
+        })
+
+        // 生成26个小写英文字母
+        const list2 = Array.from({length: 26}, (item, index) => {
+            return String.fromCharCode(index + 97)
+        })
+
+        // 方法1
+        let list3 = Array.from({length: 10000}, (item, index) => index + 1)
+
+        console.log(list3, 'list3');
+        let list4 = list3.filter(item => {
+            let flag = true
+            const _items =  item.toString().split('')
+            const _item_len = _items.length
+            for(let i = 0, len = Math.ceil(_item_len / 2) ; i < len; i++) {
+                if (_items[i] !== _items[_item_len - 1 - i]) {
+                    flag = false
+                }
+            }
+            return flag
+        })
+
+        // 方法2
+        let list5 =  list3.filter(item => {
+            return item === Number(item.toString().split('').reverse('').join(''))
+        })
+
+        console.log(list5, 'list4');
+
+    </script>
+</body>
+</html>

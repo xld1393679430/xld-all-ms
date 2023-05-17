@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // https://www.jianshu.com/p/8d8f9aa4b033
+        /*
+
+        如果DOM上绑定了过多的事件处理函数，整个页面响应以及内存占用可能都会受到影响。
+        React为了避免这类DOM事件滥用，同时屏蔽底层不同浏览器之间的事件系统差异，
+        实现了一个中间层——SyntheticEvent。
+            1,  当用户在为onClick添加函数时，React并没有将Click时间绑定在DOM上面。
+            2,  而是在document处监听所有支持的事件，当事件发生并冒泡至document处时，
+                React将事件内容封装交给中间层SyntheticEvent（负责所有事件合成）
+            3,  所以当事件触发的时候，对使用统一的分发函数dispatchEvent将指定函数执行。
+            4,  可以看待原生绑定快于合成事件绑定。
+
+            作者：shengqz
+            链接：https://www.jianshu.com/p/8d8f9aa4b033
+            来源：简书
+            著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+        */
+        class Test extends React.Component {
+            constructor(props) {
+                super(props);
+                this.onReactClick = this.onReactClick.bind(this);
+            }
+            componentDidMount() {
+                const parentDom = ReactDOM.findDOMNode(this);
+                const childrenDom = parentDom.querySelector(".button");
+                console.log(parentDom, childrenDom, 123)
+                childrenDom.addEventListener('click', this.onDomClick, false);
+            }
+            onDomClick() {
+                console.log('Javascript Dom click');
+            }
+            onReactClick() {
+                console.log('React click');
+            }
+            render() {
+                return (
+                    <div className='a'>
+                        <div className='b'>
+                            <button className="button" onClick={this.onReactClick}>点击</button>
+                        </div>
+                    </div>
+                )
+            }
+        }
+        const root = document.getElementById('root')
+        ReactDOM.render(<Test />, root)
+    </script>
+</body>
+
+</html>

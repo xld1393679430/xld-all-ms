@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序
+        // 输入: [0,1,0,3,12]
+        // 输出: [1,3,12,0,0]
+
+        let a = [0,1,0,3,12]
+        // for(let i = 0; i< a.length; i++) {
+        //     if (a[i] === 0) {
+
+        //     }
+        // }
+        a = a.map(item => {
+            return {
+                number: item,
+                checked: false
+            }
+        }).map(item => {
+            console.log(item, 1111);
+            if (item.number === 0 && !item.checked) {
+                item.checked = true
+            }
+            return item
+        })
+
+        
+        var checkedLen = a.filter(item => item.checked).length
+        a = a.filter(item => item.number && !item.checked).map(item => item.number)
+        console.log(a, 'aaaa-1')
+
+        for(let i = 0; i < checkedLen; i++) {
+            a.push(0)
+        }
+        console.log(a, 'aaaa-2')
+    </script>
+</body>
+</html>
